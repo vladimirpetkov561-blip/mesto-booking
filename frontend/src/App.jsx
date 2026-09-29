@@ -5,7 +5,7 @@ import lakeHouseImage from './assets/places/lake-house.jpg';
 import { useEffect, useState } from 'react'
 import './App.css'
 
-const API_URL = 'http://localhost:8000'
+const API_URL = 'https://mesto-booking.onrender.com'
 
 function App() {
   const [places, setPlaces] = useState([])
