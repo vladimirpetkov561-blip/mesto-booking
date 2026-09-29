@@ -1,3 +1,7 @@
+import heroImage from './assets/hero.png';
+import forestHouseImage from './assets/places/forest-house.jpg';
+import mountainCabinImage from './assets/places/mountain-cabin.jpg';
+import lakeHouseImage from './assets/places/lake-house.jpg';
 import { useEffect, useState } from 'react'
 import './App.css'
 
@@ -226,6 +230,23 @@ function App() {
       )
 
       setToken(data.access_token)
+
+      const meResponse = await fetch(`${API_URL}/users/me`, {
+        headers: {
+          Authorization: `Bearer ${data.access_token}`,
+        },
+      })
+
+      if (meResponse.ok) {
+        const meData = await meResponse.json()
+        setUser(meData)
+      } else {
+        setUser({
+          email: authForm.email,
+          name: authForm.email.split('@')[0],
+        })
+      }
+
       setAuthMode(null)
       setAuthError('')
     } catch (error) {
@@ -263,6 +284,12 @@ function App() {
 
   const handleBooking = async (event) => {
     event.preventDefault()
+    console.log('BOOKING CLICKED', {
+      token: Boolean(token),
+      user,
+      selectedPlace,
+      bookingForm,
+    })
 
     if (!token) {
       openAuth('login')
@@ -292,6 +319,12 @@ function App() {
       )
 
       const data = await response.json()
+
+      console.log('BOOKING RESPONSE', {
+        status: response.status,
+        ok: response.ok,
+        data,
+      })
 
       if (response.status === 401) {
         logout()
@@ -421,7 +454,15 @@ function App() {
 
         <main>
           <section className="place-details">
-            <div className="place-details-image">
+            <div className="place-details-image" style={{
+            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5)), url(${
+              selectedPlace?.name === 'Forest House'
+                ? forestHouseImage
+                : selectedPlace?.name === 'Mountain Cabin'
+                ? mountainCabinImage
+                : lakeHouseImage
+            })`
+          }}>
               <span>{selectedPlace.location}</span>
             </div>
 
@@ -685,7 +726,15 @@ function App() {
                 className="place-card"
                 key={place.id}
               >
-                <div className="place-image">
+                <div className="place-image" style={{
+            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5)), url(${
+              place.name === 'Forest House'
+                ? forestHouseImage
+                : place.name === 'Mountain Cabin'
+                ? mountainCabinImage
+                : lakeHouseImage
+            })`
+          }}>
                   <span>{place.location}</span>
                 </div>
 
