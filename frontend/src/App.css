@@ -502,3 +502,70 @@ button {
   flex-direction: column;
 }
 
+/* BOOKINGS */
+
+.bookings-section {
+  margin: 0 6vw 100px;
+  padding: 60px;
+  border-radius: 30px;
+  background: #ffffff;
+  border: 1px solid #e2e1db;
+  color: #151515;
+}
+
+.bookings-section h2 {
+  margin: 0 0 35px;
+  font-size: 42px;
+  letter-spacing: -2px;
+}
+
+.booking-card {
+  padding: 24px;
+  margin-bottom: 16px;
+  border: 1px solid #e2e1db;
+  border-radius: 18px;
+  background: #f8f7f3;
+  color: #151515;
+}
+
+.booking-card:last-child {
+  margin-bottom: 0;
+}
+
+.booking-card strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.booking-card p {
+  margin: 6px 0;
+  color: #66665f;
+  font-size: 14px;
+}
+
+.booking-button {
+  margin-top: 15px;
+  padding: 11px 18px;
+  border: 1px solid #151515;
+  border-radius: 999px;
+  background: #151515;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.booking-button:hover {
+  background: #333333;
+}
+
+@media (max-width: 800px) {
+  .bookings-section {
+    margin: 0 24px 70px;
+    padding: 35px 24px;
+  }
+
+  .bookings-section h2 {
+    font-size: 34px;
+  }
+}
