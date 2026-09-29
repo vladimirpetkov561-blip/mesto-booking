@@ -165,6 +165,39 @@ Base.metadata.create_all(bind=engine)
 
 
 # =========================
+# SEED PLACES
+# =========================
+
+db = SessionLocal()
+
+try:
+    if db.query(PlaceDB).count() == 0:
+        db.add_all([
+            PlaceDB(
+                name="Forest House",
+                location="Karelia",
+                price_per_night=7500,
+                description="A quiet forest house surrounded by nature."
+            ),
+            PlaceDB(
+                name="Mountain Cabin",
+                location="Caucasus Mountains",
+                price_per_night=9200,
+                description="A cozy mountain cabin with beautiful views."
+            ),
+            PlaceDB(
+                name="Lake House",
+                location="Ladoga Lake",
+                price_per_night=8500,
+                description="A peaceful house near Lake Ladoga."
+            ),
+        ])
+        db.commit()
+finally:
+    db.close()
+
+
+# =========================
 # SCHEMAS
 # =========================
 
